@@ -1,0 +1,51 @@
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: openresty-cos
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: openresty-cos
+        tier: web
+    spec:
+      containers:
+      - name: openresty-cos
+        image: @REGISTRY@/openresty-cos
+        imagePullPolicy: Always
+        resources:
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        env:
+        - name:   S3_ACCESS_KEY
+          value:  @S3_ACCESS_KEY@
+        - name:   S3_SECRET_KEY
+          value:  @S3_SECRET_KEY@
+        - name:   S3_BUCKET
+          value:  @S3_BUCKET@
+        - name:   COS_ENDPOINT
+          value:  @COS_ENDPOINT@
+        - name:   COS_URI
+          value:  @COS_URI@
+---
+---
+# Service to expose frontend
+apiVersion: v1
+kind: Service
+metadata:
+  name: openresty-cos
+  labels:
+    app: openresty-cos
+    tier: web
+spec:
+  type: NodePort
+  ports:
+  - port: 8080 # Internal Port
+    nodePort: 31200
+  selector:
+    app: openresty-cos
+    tier: web
+---

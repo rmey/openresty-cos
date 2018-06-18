@@ -1,5 +1,5 @@
 -- resty.cos
--- Module to access IBM Cloud Object Storage COS in NGINX/Openresty with HMAC signatures
+-- Lua Module to access IBM Cloud Object Storage COS in NGINX/Openresty with HMAC signatures
 -- conversion from the python example here
 -- https://console.bluemix.net/docs/services/cloud-object-storage/hmac/hmac-signature.html#constructing-an-hmac-signature
 local _M = { _VERSION = '0.1.0' }
@@ -29,13 +29,6 @@ function createSignatureKey(key, datestamp, region, service)
     local keyService = hmacme(keyString, service)
     local keySigning = hmacme(keyService, 'aws4_request')
     return keySigning
-end
-
-
-function _M.set_iso_date(self, microtime)
-  ngx.time()
-  iso_date = os.date('!%Y%m%d', microtime)
-  iso_tz   = os.date('!%Y%m%dT%H%M%SZ', microtime)
 end
 
 function set_header(host, bucket, uri, http_method, access_key, secret_key)

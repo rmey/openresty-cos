@@ -25,4 +25,4 @@ sed -i "s,S3_BUCKET,${S3_BUCKET},g" /usr/local/openresty/nginx/conf/nginx.conf
 
 cat /usr/local/openresty/nginx/conf/nginx.conf
 
-nginx -g 'daemon off;'
+nginx -g 'daemon off; error_log /dev/stderr debug;'
