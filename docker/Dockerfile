@@ -1,6 +1,6 @@
 FROM openresty/openresty:alpine
 WORKDIR /app
-RUN mkdir -p resty && apk update && apk add perl curl libressl-dev && opm install jkeys089/lua-resty-hmac
+RUN mkdir -p resty && apk update && apk add perl curl && opm install jkeys089/lua-resty-hmac && apk del perl curl
 COPY run.sh .
 COPY nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
 COPY cos.lua resty/cos.lua
