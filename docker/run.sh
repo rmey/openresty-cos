@@ -15,14 +15,11 @@ if [ -z "$COS_ENDPOINT" ] || [ -z "$COS_URI" ] || [ -z "$S3_ACCESS_KEY" ] || [ -
     echo "Variables not set exiting"
     exit;
 fi
-#do some sed replacement with comma since we need handle urls with slashes
-sed -i "s,INGRESSPATH,${INGRESSPATH},g" /usr/local/openresty/nginx/conf/nginx.conf
-sed -i "s,COS_ENDPOINT,${COS_ENDPOINT},g" /usr/local/openresty/nginx/conf/nginx.conf
-sed -i "s,COS_URI,${COS_URI},g" /usr/local/openresty/nginx/conf/nginx.conf
-sed -i "s,S3_ACCESS_KEY,${S3_ACCESS_KEY},g" /usr/local/openresty/nginx/conf/nginx.conf
-sed -i "s,S3_SECRET_KEY,${S3_SECRET_KEY},g" /usr/local/openresty/nginx/conf/nginx.conf
-sed -i "s,S3_BUCKET,${S3_BUCKET},g" /usr/local/openresty/nginx/conf/nginx.conf
 
+# this is the only variable I need to replace with sed for proxy_pass
+# otherwise I would need to set a resolver
+# see https://stackoverflow.com/questions/17685674/nginx-proxy-pass-with-remote-addr
+sed -i "s,COS_URI,${COS_URI},g" /usr/local/openresty/nginx/conf/nginx.conf
 cat /usr/local/openresty/nginx/conf/nginx.conf
 
 nginx -g 'daemon off; error_log /dev/stderr debug;'
