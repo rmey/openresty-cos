@@ -1,11 +1,12 @@
 #!/bin/sh
-# check for value of COS HTTPS URL like this https://s3.eu-de.objectstorage.softlayer.net/YOURBUCKET
 # without trailing slash
 echo "COS endpoint to static webfiles": $COS_ENDPOINT
 # COS access key
-echo "COS S3 Access KEY": $S3_ACCESS_KEY
+tmp=$S3_ACCESS_KEY
+echo "COS S3 Access KEY": "${tmp//?/*}"
 # COS access key
-echo "COS S3 Secret KEY": $S3_SECRET_KEY
+tmp=$S3_SECRET_KEY
+echo "COS S3 Secret KEY": "${tmp//?/*}"
 # S3 Bucket name
 echo "Bucket": $S3_BUCKET
 # S3 COS uri
@@ -17,9 +18,9 @@ if [ -z "$COS_ENDPOINT" ] || [ -z "$COS_URI" ] || [ -z "$S3_ACCESS_KEY" ] || [ -
 fi
 
 # this is the only variable I need to replace with sed for proxy_pass
-# otherwise I would need to set a resolver
+# otherwise I would need to set a public DNS resolver which is a security issue
 # see https://stackoverflow.com/questions/17685674/nginx-proxy-pass-with-remote-addr
 sed -i "s,COS_URI,${COS_URI},g" /usr/local/openresty/nginx/conf/nginx.conf
-cat /usr/local/openresty/nginx/conf/nginx.conf
+# cat /usr/local/openresty/nginx/conf/nginx.conf
 
-nginx -g 'daemon off; error_log /dev/stderr debug;'
+nginx -g 'daemon off;'
