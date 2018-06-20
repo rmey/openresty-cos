@@ -5,6 +5,7 @@ Prerequisites:
 * Free or paid IBM Cloud Kubernetes Custer
 * IBM Cloud Object Storage Instance with bucket and HMAC credentials
 https://console.bluemix.net/docs/services/cloud-object-storage/hmac/credentials.html#using-hmac-credentials
+* s3mcd installed,  separate configuration not needed, everything needed will be passed by 1_s3sync.sh script
 
 
 1. copy env.local.sample to env.local
