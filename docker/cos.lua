@@ -31,7 +31,8 @@ function createSignatureKey(key, datestamp, region, service)
     return keySigning
 end
 
-function set_header(host, bucket, uri, http_method, access_key, secret_key)
+function set_header(host, bucket, uri, location, http_method, access_key, secret_key)
+  uri = "/" .. string.gsub(uri, "^" .. location, "" , 1)
   local region = 'us-standard'
   local endpoint = 'https://' .. host
   local bucket = bucket

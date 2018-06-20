@@ -30,6 +30,8 @@ spec:
           value:  @COS_ENDPOINT@
         - name:   COS_URI
           value:  @COS_URI@
+        - name:   NGINX_LOCATION
+          value:  @NGINX_LOCATION@
 ---
 ---
 # Service to expose frontend

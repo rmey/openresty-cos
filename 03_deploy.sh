@@ -9,3 +9,4 @@ sed -i '' "s,@S3_SECRET_KEY@,${S3_SECRET_KEY},g" deploy2kube.yaml
 sed -i '' "s,@S3_BUCKET@,${S3_BUCKET},g" deploy2kube.yaml
 sed -i '' "s,@COS_ENDPOINT@,${COS_ENDPOINT},g" deploy2kube.yaml
 sed -i '' "s,@COS_URI@,${COS_URI},g" deploy2kube.yaml
+sed -i '' "s,@NGINX_LOCATION@,${NGINX_LOCATION},g" deploy2kube.yaml
