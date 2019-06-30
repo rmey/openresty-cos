@@ -27,5 +27,5 @@ sed -i "s,@COS_URI@,${COS_URI},g" /usr/local/openresty/nginx/conf/nginx.conf
 sed -i "s,@NGINX_LOCATION@,${NGINX_LOCATION},g" /usr/local/openresty/nginx/conf/nginx.conf
 
 cat /usr/local/openresty/nginx/conf/nginx.conf
-
+addgroup -S nginx && adduser -S nginx -G nginx
 nginx -g 'daemon off;'
