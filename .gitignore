@@ -1,3 +1,4 @@
 env.local
 test.py
 deploy2kube.yaml
+manifest.yaml

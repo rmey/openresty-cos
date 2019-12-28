@@ -1,0 +1,14 @@
+applications:
+- instances: 1
+  memory: 128M
+  stack: cflinuxfs2
+  docker:
+    image: @REGISTRY@/openresty-cos:latest
+    username: token
+  env:
+    S3_ACCESS_KEY:  @S3_ACCESS_KEY@
+    S3_SECRET_KEY:  @S3_SECRET_KEY@
+    S3_BUCKET:      @S3_BUCKET@
+    COS_URI:        @COS_URI@
+    COS_ENDPOINT:   @COS_ENDPOINT@
+    NGINX_LOCATION: @NGINX_LOCATION@
